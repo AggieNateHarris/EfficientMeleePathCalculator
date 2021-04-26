@@ -45,6 +45,6 @@ double ExpCalculations::expHr(int att, int str, int def, int stance, Equipment p
     float avgDmgOvekill = accuracy * std::min(strRoll, oppHpLvl) * (std::min(strRoll, oppHpLvl)) * 
                          (((oppHpLvl + strRoll + 1) / (oppHpLvl * (strRoll + 1) * 2)) - (2 / (oppHpLvl * (strRoll + 1) * 6)) * (2 * std::min(strRoll, oppHpLvl) + 1));
     float overkillDps = avgDmgOvekill / attackSpeed; // Overkill dps is the true dps with overkill accounted for
-    //std::cout << "Debug: Stance:" << stance << " Stats:" << att << " " << str << " " << def << " Exp/hr:" << 4 * overkillDps * 3600 << '\n';
+    std::cout << "Debug: Stance:" << stance << " Stats:" << att << " " << str << " " << def << " Exp/hr:" << 4 * overkillDps * 3600 << '\n';
     return (4 * overkillDps * 3600); // 4 exp per damage, 3600 seconds per hour, return exp/hr
 }

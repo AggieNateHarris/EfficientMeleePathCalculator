@@ -10,7 +10,7 @@ int main() {
     //std::cout << expRate << '\n';
     Equipment player;
     int startAtt = 2, startStr = 3, startDef = 1;
-    int endAtt = 60, endStr = 75, endDef = 45;
+    int endAtt = 99, endStr = 3, endDef = 1;
     player.settings(startAtt, startStr, startDef, endAtt, endStr, endDef);
     Graph adjList(startAtt, startStr, startDef, endAtt, endStr, endDef, player);
     //std::cout << adjList.indexList[267].loc.attack << '\n';
@@ -25,3 +25,7 @@ int main() {
     }
     return 0;
 }
+
+// TODO: Allow for exp rate change for seasonal game modes where exp rates are changed
+// TODO: Finish equipment selection
+// TODO: Try and fix slowness of graph creation

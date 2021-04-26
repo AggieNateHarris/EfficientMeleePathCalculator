@@ -9,7 +9,7 @@ Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, i
 {
     // Cap inputs to avoid using too much memory. The number of adjacency lists is tied to the range of combinations that will be made of (x att, y str, z def)
     // Also ensure that the starting values are lower than ending values
-    if (((endAtt-startAtt-1) * (endStr-startStr-1) * (endDef-startDef-1)) < 5000000 && startAtt < endAtt && startStr < endStr && startDef < endDef) {
+    if (((endAtt-startAtt-1) * (endStr-startStr-1) * (endDef-startDef-1)) < 5000000 && startAtt <= endAtt && startStr <= endStr && startDef <= endDef) {
         
         // indexList is a vertex pointer tied to a graph object. Create a dynamic array large enough for every possible vertex with indexList at the head
         this->indexList = new vertex[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
