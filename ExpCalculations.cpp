@@ -27,9 +27,9 @@ double ExpCalculations::expHr(int att, int str, int def, int stance, Equipment p
     else if (stance == 3)
         defStance = 11;
 
-    float attRoll = ((att * attPotionBoost * attPrayerBoost) + attStance)* (64 + attBonus);                   //Effective lvl * (64 + att bonus)   SOURCE BITTERKOEKJE DPS SHEET
+    float attRoll = ((att * attPotionBoost * attPrayerBoost) + attStance)* (64 + attBonus);                          //Effective lvl * (64 + att bonus)   SOURCE BITTERKOEKJE DPS SHEET
     float strRoll = floor(0.5 + (((str * strPotionBoost * strPrayerBoost) + strStance) * (64 + strBonus) / 640));    //0.5 + (Effective level * ((64 + str bonus) / 640))
-    float oppDefRoll = (9 + oppDefLvl) * (64 + oppDefBonus);                                                  //(9 + def lvl) * (64 + def bonus)
+    float oppDefRoll = (9 + oppDefLvl) * (64 + oppDefBonus);                                                         //(9 + def lvl) * (64 + def bonus)
     float accuracy;
 
     // Formula for accuracy changes depending on whether the max attacking roll or the max defending roll is higher
@@ -44,7 +44,10 @@ double ExpCalculations::expHr(int att, int str, int def, int stance, Equipment p
     // Overkill Dps: Avg dmg overkill / attack speed(seconds/attack)
     float avgDmgOvekill = accuracy * std::min(strRoll, oppHpLvl) * (std::min(strRoll, oppHpLvl)) * 
                          (((oppHpLvl + strRoll + 1) / (oppHpLvl * (strRoll + 1) * 2)) - (2 / (oppHpLvl * (strRoll + 1) * 6)) * (2 * std::min(strRoll, oppHpLvl) + 1));
-    float overkillDps = avgDmgOvekill / attackSpeed; // Overkill dps is the true dps with overkill accounted for
-    std::cout << "Debug: Stance:" << stance << " Stats:" << att << " " << str << " " << def << " Exp/hr:" << 4 * overkillDps * 3600 << '\n';
+    
+    float overkillDps = avgDmgOvekill / attackSpeed;
+
+    //std::cout << "Debug: Stance:" << stance << " Stats:" << att << " " << str << " " << def << " Exp/hr:" << 4 * overkillDps * 3600 << '\n';
+
     return (4 * overkillDps * 3600); // 4 exp per damage, 3600 seconds per hour, return exp/hr
 }

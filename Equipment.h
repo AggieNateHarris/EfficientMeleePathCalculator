@@ -6,6 +6,10 @@
 class Equipment
 {
 public:
+    int* attRollTable;
+    int* strRollTable;
+    int* speedTable;
+
     std::string getWeapon(int att, int str, int def);
     std::string getHelm(int att, int str, int def);
     std::string getNecklace(int att, int str, int def);
@@ -26,7 +30,6 @@ public:
     int getOppDefBonus();
     int getOppDefLvl();
     int getOppHpLvl();
-
     void settings(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef);
 
     std::map<std::string, int> equipmentAtt = {

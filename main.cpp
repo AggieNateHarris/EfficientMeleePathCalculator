@@ -5,12 +5,11 @@
 #include <iostream>
 
 int main() {
-    std::cout << "hello there" << '\n';
     //double expRate = ExpCalculations::expHr(1, 2, 1, 1);
     //std::cout << expRate << '\n';
     Equipment player;
     int startAtt = 2, startStr = 3, startDef = 1;
-    int endAtt = 99, endStr = 3, endDef = 1;
+    int endAtt = 20, endStr = 20, endDef = 20;
     player.settings(startAtt, startStr, startDef, endAtt, endStr, endDef);
     Graph adjList(startAtt, startStr, startDef, endAtt, endStr, endDef, player);
     //std::cout << adjList.indexList[267].loc.attack << '\n';
@@ -29,3 +28,4 @@ int main() {
 // TODO: Allow for exp rate change for seasonal game modes where exp rates are changed
 // TODO: Finish equipment selection
 // TODO: Try and fix slowness of graph creation
+// TODO: Finish commenting everything

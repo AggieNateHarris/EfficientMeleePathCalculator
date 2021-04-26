@@ -1,6 +1,12 @@
 #include "Equipment.h"
 #include <iostream>
 
+// This bonus getter is making exp/hr calcs take way too long, need to come up with a solution to speed it up
+// Idea 1: Object keeps a store of attbonus, strbonus, ... etc, when asking for this info just look up the already
+// set values. These values will only be calculated when a level up happens that *could* effect the bonus
+// Idea 2: Tables of values at certain levels will be created once during the settings process and when asking
+// for bonus a simple table look up will always be all that's required
+
 std::string Equipment::getWeapon(int att, int str, int def) {
     std::string weapon;
     if (att < 40 && str < 40)
@@ -155,7 +161,7 @@ int Equipment::getAttBonus(int att, int str, int def) {
     attBonus += equipmentAtt[getGloves(att, str, def)];
     attBonus += equipmentAtt[getBoots(att, str, def)];
     attBonus += equipmentAtt[getRing(att, str, def)];
-    
+    int attBonus = this->attBonus;
     return attBonus;
 }
 
@@ -171,7 +177,7 @@ int Equipment::getStrBonus(int att, int str, int def) {
     strBonus += equipmentStr[getGloves(att, str, def)];
     strBonus += equipmentStr[getBoots(att, str, def)];
     strBonus += equipmentStr[getRing(att, str, def)];
-
+    int strBonus = this->strBonus;
     return strBonus;
 }
 
@@ -194,26 +200,26 @@ int Equipment::getStrPotionBoost(int str) {
 }
 
 float Equipment::getAttPrayerBoost() {
-    return this->prayerAttBoost[this->attPrayer];
+    return 1.1; //this->prayerAttBoost[this->attPrayer];
 }
 
 float Equipment::getStrPrayerBoost() {
-    return this->prayerStrBoost[this->strPrayer];
+    return 1.1; //this->prayerStrBoost[this->strPrayer];
 }
 
 int Equipment::getSpeed(int att, int str, int def) {            // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
-    return this->equipmentSpeed[getWeapon(att, str, def)];
+    return 2.4;// this->equipmentSpeed[getWeapon(att, str, def)];
 }
 
 int Equipment::getOppDefBonus() {
-    return this->opponentDefBonus[this->opponent];
+    return 1;// this->opponentDefBonus[this->opponent];
 }
 
 int Equipment::getOppDefLvl() {
-    return this->opponentDefLvl[this->opponent];
+    return 1;// this->opponentDefLvl[this->opponent];
 }
 int Equipment::getOppHpLvl() {
-    return this->opponentHp[this->opponent];
+    return 50;// this->opponentHp[this->opponent];
 }
 
 void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef) {

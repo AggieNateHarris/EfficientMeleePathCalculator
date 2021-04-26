@@ -13,42 +13,73 @@ Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, i
         
         // indexList is a vertex pointer tied to a graph object. Create a dynamic array large enough for every possible vertex with indexList at the head
         this->indexList = new vertex[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
+        
+        // Initialize indexList list 0's weight to the number of vertices in the graph
         this->indexList[0].weight = ((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1));
+        
+        // counter is incremented for every new vertex and is used to index in indexList
         int counter = 1;
+
+        // startAtt, startStr, startDef will all be used in the following triple for loop where vertices will be initialized
+        // during initialization vertices will get their weight, list of outgoing vertices, and a shortest path of INF
         int i = startAtt, ii = startStr, iii = startDef;
+        // First loop takes care of 'third digit', aka attack, aka x in ( x, y, z )
         while (i <= endAtt) {
+            // Second loop takes care of 'second digit', aka strength, aka y in ( x, y, z )
             while (ii <= endStr) {
+                // Third loop takes care of 'first digit' aka defence, aka z in (x, y, z )
                 while (iii <= endDef) {
+
+                    // If the very starting vertex, set shortest path to 0
+                    // Else not first vertex and set the shortest path to INF to be updated later
                     if (i == startAtt && ii == startStr && iii == startDef)
                         this->indexList[counter].shortestPath = 0;
                     else
                         this->indexList[counter].shortestPath = INF;
 
+                    // Initialize current vertex's location using i, ii, iii
                     this->indexList[counter].loc = { i, ii, iii };
 
+                    // holder pointers will be used to initialize the outgoing vertice list for current vertex
+                    // each vertex will have at most 3 outgoing vertice so at most all 3 holders will be used
+                    // it is possible to not need all of them in a case of ( max, x, y) where only x and y
+                    // can increase and therefore only 2 outgoing edges are possible
                     vertex* holder = new vertex;
                     vertex* holder2 = new vertex;
                     vertex* holder3 = new vertex;
+
+                    // if attack can be increased, increase it and place it in holder, initialize rest of list
+                    // which can include str increase or def increase, also initialize weight
                     if (i < endAtt) {
                         holder->loc = { i + 1,ii,iii };
                         if (ii < endStr)
                             holder->nextLink = holder2;
                         else if (iii < endDef)
                             holder->nextLink = holder3;
-
+                        // weight for a vertex is equal to exp to be gained for the level divided by exp/hr
+                        // weight is the edge weight between vertices, this is in hour units
                         holder->weight = ExpCalculations::expLeft(holder->loc.attack) / ExpCalculations::expHr(i, ii, iii, 1, player); // Time in hours to gain required exp
                     }
+
+                    // if strength can be increased, increase it and place it in holder2, initialize rest of list
+                    // which can include def increase, also initialize weight
                     if (ii < endStr) {
                         holder2->loc = { i, ii + 1, iii };
                         if (iii < endDef)
                             holder2->nextLink = holder3;
                         holder2->weight = ExpCalculations::expLeft(holder2->loc.strength) / ExpCalculations::expHr(i, ii, iii, 2, player);
                     }
+
+                    // if defence can be increased, increase it and place it in holder3, initialize rest of list
+                    // also initialize weight
                     if (iii < endDef) {
                         holder3->loc = { i, ii, iii + 1 };
                         holder3->weight = ExpCalculations::expLeft(holder3->loc.defence) / ExpCalculations::expHr(i, ii, iii, 3, player);
                     }
 
+                    // If i is less than max attack, that means attack can be increased and the increased
+                    // attack level will be in the list, connect base vertex to holder
+                    // if attack can't be increased, move on to check strength, then defence if str fails
                     if (i < endAtt)
                         this->indexList[counter].nextLink = holder;
                     else if (ii < endStr)
@@ -56,23 +87,36 @@ Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, i
                     else if (iii < endDef)
                         this->indexList[counter].nextLink = holder3;
 
+                    // pointer clean up
+                    holder = nullptr;
+                    holder2 = nullptr;
+                    holder3 = nullptr;
+                    delete holder, holder2, holder3;
+
+                    // Gone through 1 vertex, increase counter aswell as third digit defence
                     counter++;
                     iii++;
                 }
+                // Gone through a set of third digits, increase second digit and reset third digit
                 ii++;
                 iii = startDef;
             }
+            // Gone through a set of second digit, increase first digit and reset second digit
             i++;
             ii = startStr;
         }
     }
-    else {
+
+    // The start and end points for att, str, def were too big, enter smaller values
+    else
         std::cout << "Error: Memory overflow, try a smaller range! Or starting stats exceeded ending stats.\n";
-    }
 
 }
 
+
 void Graph::printGraph(Equipment player) {
+
+    // go through every vertex in the graph, indexList list 0 will uniquely have the number of vertices for it's weight
     for (int i = 1; i < this->indexList[0].weight; i++) {
         std::cout << '\n';
         vertex* copy = &this->indexList[i];
