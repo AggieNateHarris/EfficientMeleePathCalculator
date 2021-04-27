@@ -2,10 +2,9 @@
 #include <iostream>
 
 // This bonus getter is making exp/hr calcs take way too long, need to come up with a solution to speed it up
-// Idea 1: Object keeps a store of attbonus, strbonus, ... etc, when asking for this info just look up the already
-// set values. These values will only be calculated when a level up happens that *could* effect the bonus
-// Idea 2: Tables of values at certain levels will be created once during the settings process and when asking
-// for bonus a simple table look up will always be all that's required
+// Plan to fix right now: calculate all individual attack bonus and strength bonus while doing the settings
+// Have gearup copy those values over to itself and pass a gearup object instead of an equipment object
+// make sure to get gearup any other values that it will need(potion and prayer boosts), opponent rolls
 
 std::string Equipment::getWeapon(int att, int str, int def) {
     std::string weapon;
@@ -161,7 +160,6 @@ int Equipment::getAttBonus(int att, int str, int def) {
     attBonus += equipmentAtt[getGloves(att, str, def)];
     attBonus += equipmentAtt[getBoots(att, str, def)];
     attBonus += equipmentAtt[getRing(att, str, def)];
-    int attBonus = this->attBonus;
     return attBonus;
 }
 
@@ -177,7 +175,6 @@ int Equipment::getStrBonus(int att, int str, int def) {
     strBonus += equipmentStr[getGloves(att, str, def)];
     strBonus += equipmentStr[getBoots(att, str, def)];
     strBonus += equipmentStr[getRing(att, str, def)];
-    int strBonus = this->strBonus;
     return strBonus;
 }
 
@@ -832,5 +829,353 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
                 exit;
         }
         choice = 0;
+    }
+
+    // During the time that you are lower than 10 def
+    if (startDef < 10) {
+
+        // While loop to block choice into possible choices
+        while (choice > 4 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the cape you will be using.\n";
+            std::cout << "1. Fire cape\n";
+            std::cout << "2. Infernal cape\n";
+            std::cout << "3. Nothing\n";
+            std::cout << "4. Exit\n";
+            std::cin >> choice;
+
+            // If you choose Firecape, set this bracket and all above brackets to RPG, higher brackets will be changed later if at all
+            if (choice == 1) {
+                this->cape1Def = "FIRECAPE";
+                this->cape40Def = "FIRECAPE";
+                this->cape70Def = "FIRECAPE";
+            }
+
+            // If you choose Infernal cape, set this bracket and all above brackets to infernal cape, higher brackets will be changed later if at all
+            else if (choice == 2) {
+                this->cape1Def = "INFERNALCAPE";
+                this->cape40Def = "INFERNALCAPE";
+                this->cape70Def = "INFERNALCAPE";
+            }
+
+            else if (choice == 3) {
+                this->cape1Def = "NOTHING";
+                this->cape40Def = "NOTHING";
+                this->cape70Def = "NOTHING";
+            }
+
+            else if (choice == 4)
+                exit;
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 8 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the necklace you will be using.\n";
+            std::cout << "1. Amulet of torture\n";
+            std::cout << "2. Amulet of fury\n";
+            std::cout << "3. Amulet of glory\n";
+            std::cout << "4. Amulet of strength\n";
+            std::cout << "5. Berserker necklace\n";
+            std::cout << "6. Amulet of power\n";
+            std::cout << "7. Nothing\n";
+            std::cout << "8. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->necklace1Def = "AMMYTORTURE";          
+                this->necklace40Def = "AMMYTORTURE";
+                this->necklace70Def = "AMMYTORTURE";
+            }
+
+            else if (choice == 2) {
+                this->necklace1Def = "AMMYFURY";
+                this->necklace40Def = "AMMYFURY";
+                this->necklace70Def = "AMMYFURY";
+            }
+
+            else if (choice == 3) {
+                this->necklace1Def = "AMMYGLORY";
+                this->necklace40Def = "AMMYGLORY";
+                this->necklace70Def = "AMMYGLORY";
+            }
+
+            else if (choice == 4) {
+                this->necklace1Def = "AMMYSTRENGTH";
+                this->necklace40Def = "AMMYSTRENGTH";
+                this->necklace70Def = "AMMYSTRENGTH";
+            }
+
+            else if (choice == 5) {
+                this->necklace1Def = "BERSERKERNECKLACE";
+                this->necklace40Def = "BERSERKERNECKLACE";
+                this->necklace70Def = "BERSERKERNECKLACE";
+            }
+
+            else if (choice == 6) {
+                this->necklace1Def = "AMMYPOWER";
+                this->necklace40Def = "AMMYPOWER";
+                this->necklace70Def = "AMMYPOWER";
+            }
+
+            else if (choice == 7) {
+                this->necklace1Def = "NOTHING";
+                this->necklace40Def = "NOTHING";
+                this->necklace70Def = "NOTHING";
+            }
+
+            else if (choice == 8)
+                exit;
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 3 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the shield you will be using.\n";
+            std::cout << "1. Book of war\n";
+            std::cout << "2. Nothing\n";
+            std::cout << "3. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->shield1Def = "BOOKOFWAR";
+                this->shield10Def = "BOOKOFWAR";
+                this->shield20Def = "BOOKOFWAR";
+                this->shield30Def = "BOOKOFWAR";
+                this->shield40Def = "BOOKOFWAR";
+                this->shield60Def = "BOOKOFWAR";
+                this->shield70Def = "BOOKOFWAR";
+                this->shield75Def = "BOOKOFWAR";
+            }
+
+            else if (choice == 2) {
+                this->shield1Def = "NOTHING";
+                this->shield10Def = "NOTHING";
+                this->shield20Def = "NOTHING";
+                this->shield30Def = "NOTHING";
+                this->shield40Def = "NOTHING";
+                this->shield60Def = "NOTHING";
+                this->shield70Def = "NOTHING";
+                this->shield75Def = "NOTHING";
+            }
+
+            else if (choice == 3) {
+                exit;
+            }
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 3 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the leg slot item you will be using.\n";
+            std::cout << "1. Fremennik kilt\n";
+            std::cout << "2. Nothing\n";
+            std::cout << "3. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->legs1Def = "FREMMYKILT";
+                this->legs30Def = "FREMMYKILT";
+                this->legs60Def = "FREMMYKILT";
+                this->legs65Def = "FREMMYKILT";
+            }
+
+            else if (choice == 2) {
+                this->legs1Def = "NOTHING";
+                this->legs30Def = "NOTHING";
+                this->legs60Def = "NOTHING";
+                this->legs65Def = "NOTHING";
+            }
+
+            else if (choice == 3) {
+                exit;
+            }
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 5 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the gloves you will be using.\n";
+            std::cout << "1. Regeneration bracelet\n";
+            std::cout << "2. Combat bracelete\n";
+            std::cout << "3. Mithril gloves\n";
+            std::cout << "4. Nothing\n";
+            std::cout << "5. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->gloves1Def = "REGENBRACE";
+                this->gloves32Def = "REGENBRACE";
+                this->gloves42Def = "REGENBRACE";
+                this->gloves80Def = "REGENBRACE";
+            }
+
+            if (choice == 2) {
+                this->gloves1Def = "COMBATBRACE";
+                this->gloves32Def = "COMBATBRACE";
+                this->gloves42Def = "COMBATBRACE";
+                this->gloves80Def = "COMBATBRACE";
+            }
+
+            if (choice == 3) {
+                this->gloves1Def = "MITHRILGLOVES";
+                this->gloves32Def = "MITHRILGLOVES";
+                this->gloves42Def = "MITHRILGLOVES";
+                this->gloves80Def = "MITHRILGLOVES";
+            }
+
+            else if (choice == 4) {
+                this->gloves1Def = "NOTHING";
+                this->gloves32Def = "NOTHING";
+                this->gloves42Def = "NOTHING";
+                this->gloves80Def = "NOTHING";
+            }
+
+            else if (choice == 5) {
+                exit;
+            }
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 4 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the boots you will be using.\n";
+            std::cout << "1. Spiked manacles\n";
+            std::cout << "2. Climbing boots\n";
+            std::cout << "3. Nothing\n";
+            std::cout << "4. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->boot1Def = "SPIKEDMANACLES";
+                this->boot50Def = "SPIKEDMANACLES";
+                this->boot60Def = "SPIKEDMANACLES";
+                this->boot75Def = "SPIKEDMANACLES";
+            }
+
+            if (choice == 2) {
+                this->boot1Def = "CLIMBINGBOOTS";
+                this->boot50Def = "CLIMBINGBOOTS";
+                this->boot60Def = "CLIMBINGBOOTS";
+                this->boot75Def = "CLIMBINGBOOTS";
+            }
+
+            else if (choice == 3) {
+                this->boot1Def = "NOTHING";
+                this->boot50Def = "NOTHING";
+                this->boot60Def = "NOTHING";
+                this->boot75Def = "NOTHING";
+            }
+
+            else if (choice == 4) {
+                exit;
+            }
+        }
+        choice = 0;
+
+        // While loop to block choice into possible choices
+        while (choice > 5 || choice < 1) {
+            std::cout << "For when def < 10, please enter the number next to the ring you will be using.\n";
+            std::cout << "1. Berserker ring(i)\n";
+            std::cout << "2. Berserker ring\n";
+            std::cout << "3. Brimstone ring\n";
+            std::cout << "4. Nothing\n";
+            std::cout << "5. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->ring1Def = "BERSERKERRINGI";
+                this->ring50Def = "BERSERKERRINGI";
+            }
+
+            if (choice == 2) {
+                this->ring1Def = "BERSERKERRING";
+                this->ring50Def = "BERSERKERRING";
+            }
+
+            else if (choice == 3) {
+                this->ring1Def = "BRIMSTONERING";
+                this->ring50Def = "BRIMSTONERING";
+            }
+
+            else if (choice == 4) {
+                this->ring1Def = "NOTHING";
+                this->ring50Def = "NOTHING";
+            }
+
+            else if (choice == 5) {
+                exit;
+            }
+        }
+        choice = 0;
+    }
+
+    // During the time that you are greater than 10 def
+    if (startDef < 20 && endDef >= 10) {
+        // While loop to block choice into possible choices
+        while (choice > 4 || choice < 1) {
+            std::cout << "For when def is 10 or greater, please enter the number next to the shield you will be using.\n";
+            std::cout << "1. Black defender\n";
+            std::cout << "2. Book of war\n";
+            std::cout << "3. Nothing\n";
+            std::cout << "4. Exit\n";
+            std::cin >> choice;
+
+            if (choice == 1) {
+                this->shield1Def = "BLACKDEFENDER";
+                this->shield10Def = "BLACKDEFENDER";
+                this->shield20Def = "BLACKDEFENDER";
+                this->shield30Def = "BLACKDEFENDER";
+                this->shield40Def = "BLACKDEFENDER";
+                this->shield60Def = "BLACKDEFENDER";
+                this->shield70Def = "BLACKDEFENDER";
+                this->shield75Def = "BLACKDEFENDER";
+            }
+
+            if (choice == 2) {
+                this->shield1Def = "BOOKOFWAR";
+                this->shield10Def = "BOOKOFWAR";
+                this->shield20Def = "BOOKOFWAR";
+                this->shield30Def = "BOOKOFWAR";
+                this->shield40Def = "BOOKOFWAR";
+                this->shield60Def = "BOOKOFWAR";
+                this->shield70Def = "BOOKOFWAR";
+                this->shield75Def = "BOOKOFWAR";
+            }
+
+            else if (choice == 3) {
+                this->shield1Def = "NOTHING";
+                this->shield10Def = "NOTHING";
+                this->shield20Def = "NOTHING";
+                this->shield30Def = "NOTHING";
+                this->shield40Def = "NOTHING";
+                this->shield60Def = "NOTHING";
+                this->shield70Def = "NOTHING";
+                this->shield75Def = "NOTHING";
+            }
+
+            else if (choice == 4) {
+                exit;
+            }
+        }
+        choice = 0;
+    }
+
+    //if (startDef < 30 && endDef >= 20) {
+
+    //}
+
+    this->attBonusTable = new int[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
+    this->strBonusTable = new int[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
+    this->speedTable = new float[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
+
+    int i = startAtt, ii = startStr, iii = startDef, counter = 1;
+    while (i <= endAtt) {
+        while (ii <= endStr) {
+            while (iii <= endDef) {
+                attBonusTable[counter] = getAttBonus(i, ii, iii);
+                strBonusTable[counter] = getStrBonus(i, ii, iii);
+                speedTable[counter] = getSpeed(i, ii, iii);
+            }
+        }
     }
 }

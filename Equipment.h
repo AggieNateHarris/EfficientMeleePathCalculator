@@ -6,9 +6,9 @@
 class Equipment
 {
 public:
-    int* attRollTable;
-    int* strRollTable;
-    int* speedTable;
+    int* attBonusTable;
+    int* strBonusTable;
+    float* speedTable;
 
     std::string getWeapon(int att, int str, int def);
     std::string getHelm(int att, int str, int def);
