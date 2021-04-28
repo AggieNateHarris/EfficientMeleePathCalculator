@@ -26,7 +26,7 @@ public:
     int getStrPotionBoost(int str);
     float getAttPrayerBoost();
     float getStrPrayerBoost();
-    int getSpeed(int att, int str, int def); // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
+    float getSpeed(int att, int str, int def); // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
     int getOppDefBonus();
     int getOppDefLvl();
     int getOppHpLvl();
@@ -59,13 +59,36 @@ public:
         {"OBBYHELM", 0},
         {"INQUISITORSHELM", 8},
 
+        {"FIRECAPE", 1},
+        {"INFERNALCAPE", 4},
+
+        {"AMMYTORTURE", 15},
+        {"AMMYFURY", 10},
+        {"AMMYGLORY", 10},
+        {"AMMYSTRENGTH", 0},
+        {"AMMYPOWER", 6},
         {"BERSERKERNECKLACE", -10},
 
         {"OBBYPLATE", 0},
         {"INQUISITORSPLATE", 12},
 
+        {"BOOKOFWAR", 0},
+        {"BLACKDEFENDER", 8},
+
         {"OBBYLEGS", 0},
-        {"INQUISITORSLEGS", 12}
+        {"INQUISITORSLEGS", 12},
+        {"FREMMYKILT", 0},
+
+        {"REGENBRACE", 8},
+        {"COMBATBRACE", 7},
+        {"MITHRILGLOVES", 6},
+
+        {"SPIKEDMANACLES", 0},
+        {"CLIMBINGBOOTS", 0},
+
+        {"BERSERKERRINGI", 0},
+        {"BERSERKERRING", 0},
+        {"BRIMSTONERING", 0}
     };
 
     std::map<std::string, int> equipmentStr = {
@@ -95,13 +118,36 @@ public:
         {"OBBYHELM", 3},
         {"INQUISITORSHELM", 4},
 
+        {"FIRECAPE", 4},
+        {"INFERNALCAPE", 8},
+
+        {"AMMYTORTURE", 10},
+        {"AMMYFURY", 8},
+        {"AMMYGLORY", 6},
+        {"AMMYSTRENGTH", 10},
+        {"AMMYPOWER", 6},
         {"BERSERKERNECKLACE", 7},
 
         {"OBBYPLATE", 3},
         {"INQUISITORSPLATE", 4},
 
+        {"BOOKOFWAR", 2},
+        {"BLACKDEFENDER", 2},
+
         {"OBBYLEGS", 1},
-        {"INQSUITORSLEGS", 2}
+        {"INQSUITORSLEGS", 2},
+        {"FREMMYKILT", 1},
+
+        {"REGENBRACE", 7},
+        {"COMBATBRACE", 6},
+        {"MITHRILGLOVES", 6},
+
+        {"SPIKEDMANACLES", 4},
+        {"CLIMBINGBOOTS", 2},
+
+        {"BERSERKERRINGI", 8},
+        {"BERSERKERRING", 4},
+        {"BRIMSTONERING", 4}
     };
 
     std::map<std::string, float> equipmentSpeed = {

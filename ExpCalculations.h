@@ -1,7 +1,8 @@
 #ifndef EXPCALCULATIONS_H
 #define EXPCALCULATIONS_H
 #include <iostream>
-#include "Equipment.h"
+#include "GearUp.h"
+#include "Graph.h"
 
 const int ExpTable[99] = {
 0,
@@ -109,7 +110,8 @@ class ExpCalculations
 {
 public:
     static int expLeft(int end);
-    static double expHr(int att, int str, int def, int stance, Equipment player);
+    static double expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp);
+    static int findLocation(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef);
 };
 
 #endif

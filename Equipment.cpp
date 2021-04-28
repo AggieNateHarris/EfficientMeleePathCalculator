@@ -197,26 +197,26 @@ int Equipment::getStrPotionBoost(int str) {
 }
 
 float Equipment::getAttPrayerBoost() {
-    return 1.1; //this->prayerAttBoost[this->attPrayer];
+    return this->prayerAttBoost[this->attPrayer];
 }
 
 float Equipment::getStrPrayerBoost() {
-    return 1.1; //this->prayerStrBoost[this->strPrayer];
+    return this->prayerStrBoost[this->strPrayer];
 }
 
-int Equipment::getSpeed(int att, int str, int def) {            // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
-    return 2.4;// this->equipmentSpeed[getWeapon(att, str, def)];
+float Equipment::getSpeed(int att, int str, int def) {            // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
+    return this->equipmentSpeed[getWeapon(att, str, def)];
 }
 
 int Equipment::getOppDefBonus() {
-    return 1;// this->opponentDefBonus[this->opponent];
+    return this->opponentDefBonus[this->opponent];
 }
 
 int Equipment::getOppDefLvl() {
-    return 1;// this->opponentDefLvl[this->opponent];
+    return this->opponentDefLvl[this->opponent];
 }
 int Equipment::getOppHpLvl() {
-    return 50;// this->opponentHp[this->opponent];
+    return this->opponentHp[this->opponent];
 }
 
 void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef) {
@@ -1175,7 +1175,13 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
                 attBonusTable[counter] = getAttBonus(i, ii, iii);
                 strBonusTable[counter] = getStrBonus(i, ii, iii);
                 speedTable[counter] = getSpeed(i, ii, iii);
+                counter++;
+                iii++;
             }
+            iii = startDef;
+            ii++;
         }
+        ii = startStr;
+        i++;
     }
 }
