@@ -35,5 +35,5 @@ int main() {
 // TODO: Finish equipment selection
 // TODO: Try and fix slowness of graph creation
 // TODO: Finish commenting everything
-// TODO: Fix unique controlled style to spread xp and +1 att and str stance
+// TODO: Fix unique controlled style to spread xp and +1 att and str stance, bludgeon str only, whip att/def only for full exp
 // TODO: Class deconstructors to clean up pointers
