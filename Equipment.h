@@ -31,6 +31,7 @@ public:
     int getOppDefLvl();
     int getOppHpLvl();
     void settings(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef);
+    ~Equipment();
 
     std::map<std::string, int> equipmentAtt = {
         {"RPG", 0},
@@ -58,9 +59,14 @@ public:
 
         {"OBBYHELM", 0},
         {"INQUISITORSHELM", 8},
+        {"BERSERKERHELM", 0},
+        {"NEZZYHELM", 0},
+        {"SERPHELM", 0},
+        {"NEZZYFACEGUARD", 0},
 
         {"FIRECAPE", 1},
         {"INFERNALCAPE", 4},
+        {"MYTHCAPE", 6},
 
         {"AMMYTORTURE", 15},
         {"AMMYFURY", 10},
@@ -74,6 +80,13 @@ public:
 
         {"BOOKOFWAR", 0},
         {"BLACKDEFENDER", 8},
+        {"MITHRILDEFENDER", 9},
+        {"ADAMANTDEFENDER", 12},
+        {"RUNEDEFENDER", 19},
+        {"DRAGONDEFENDER", 24},
+        {"OBBYSHIELD", 0},
+        {"AVERNICDEFENDER", 29},
+        {"DRAGONFIRESHIELD", 0},
 
         {"OBBYLEGS", 0},
         {"INQUISITORSLEGS", 12},
@@ -82,9 +95,13 @@ public:
         {"REGENBRACE", 8},
         {"COMBATBRACE", 7},
         {"MITHRILGLOVES", 6},
+        {"BARROWGLOVES", 12},
+        {"FEROCIOUSGLOVES", 16},
 
         {"SPIKEDMANACLES", 0},
         {"CLIMBINGBOOTS", 0},
+        {"GRANITEBOOTS", 0},
+        {"DRAGONBOOTS", 0},
 
         {"BERSERKERRINGI", 0},
         {"BERSERKERRING", 0},
@@ -117,9 +134,14 @@ public:
 
         {"OBBYHELM", 3},
         {"INQUISITORSHELM", 4},
+        {"BERSERKERHELM", 3},
+        {"NEZZYHELM", 3},
+        {"SERPHELM", 5},
+        {"NEZZYFACEGUARD", 6},
 
         {"FIRECAPE", 4},
         {"INFERNALCAPE", 8},
+        {"MYTHCAPE", 1},
 
         {"AMMYTORTURE", 10},
         {"AMMYFURY", 8},
@@ -133,6 +155,13 @@ public:
 
         {"BOOKOFWAR", 2},
         {"BLACKDEFENDER", 2},
+        {"MITHRILDEFENDER", 3},
+        {"ADAMANTDEFENDER", 4},
+        {"RUNEDEFENDER", 5},
+        {"DRAGONDEFENDER", 6},
+        {"OBBYSHIELD", 0},
+        {"AVERNICDEFENDER", 8},
+        {"DRAGONFIRESHIELD", 7},
 
         {"OBBYLEGS", 1},
         {"INQSUITORSLEGS", 2},
@@ -141,9 +170,13 @@ public:
         {"REGENBRACE", 7},
         {"COMBATBRACE", 6},
         {"MITHRILGLOVES", 6},
+        {"BARROWGLOVES", 12},
+        {"FEROCIOUSGLOVES", 14},
 
         {"SPIKEDMANACLES", 4},
         {"CLIMBINGBOOTS", 2},
+        {"GRANITEBOOTS", 3},
+        {"DRAGONBOOTS", 4},
 
         {"BERSERKERRINGI", 8},
         {"BERSERKERRING", 4},
@@ -260,7 +293,8 @@ public:
     std::string shield30Def = "NOTHING";
     std::string shield40Def = "NOTHING";
     std::string shield60Def = "NOTHING";
-    std::string shield70Def = "NOTHING";
+    std::string shield70Def70Att = "NOTHING";
+    std::string shield75Def70Att = "NOTHING";
     std::string shield75Def = "NOTHING";
 
     std::string legs1Def = "NOTHING";
@@ -271,7 +305,7 @@ public:
     std::string gloves1Def = "NOTHING";
     std::string gloves32Def = "NOTHING";
     std::string gloves42Def = "NOTHING";
-    std::string gloves80Def = "NOTHING";
+    std::string gloves80Def80Att = "NOTHING";
 
     std::string boot1Def = "NOTHING";
     std::string boot50Def = "NOTHING";

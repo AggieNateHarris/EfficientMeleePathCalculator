@@ -10,8 +10,8 @@ int main() {
     //std::cout << expRate << '\n';
     Equipment player;
     GearUp gearUp;
-    int startAtt = 2, startStr = 3, startDef = 1;
-    int endAtt = 99, endStr = 99, endDef = 99;
+    int startAtt = 1, startStr = 1, startDef = 1;
+    int endAtt = 10, endStr = 10, endDef = 99;
     player.settings(startAtt, startStr, startDef, endAtt, endStr, endDef);
     gearUp.fillTableRolls(player);
     gearUp.fillPotionBoosts(player);
