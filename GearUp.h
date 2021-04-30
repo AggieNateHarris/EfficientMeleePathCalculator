@@ -8,18 +8,25 @@
 class GearUp
 {
 public:
-    // int pointer tables are made up of all the different equipment unlock stat combinations: (<40, <40, <10), (<40, <40, 10), (<40, <40, 20), ..., def 30, 40, 42, 50, 60, 65, 70, 75
-    int* attRollTable;                                              // The tables for each will be ordered in the following manner
-    int* strRollTable;                                              // Index 0-10: (<40, <40, <10), ..., (<40, <40, >=75)
-    float* speedTable;                                              // Index 11-21: (<40, 59-40, <10), ..., (<40, 59-40, >=75)
-    int* attPotBoost;                                             // Index 22-32: (<40, >=60, <10), ..., (<40, 59-40, >=75)
-    int* strPotBoost;                                             // Index 33-43: (40, <40, <10), ..., (40, <40, >=75)
-    float attPrayerBoost;                                           // Index 44-65: " ^ " 59-40 str, 60+ str
-    float strPrayerboost;                                           // Index 66-99: " " 50 att combinations
-    int oppDefLevel;                                                // Index 100-198: " " 60, 70, 75 att combinations
+    // int pointer tables are tables of bonuses depending on relevant variables such as att,str,def, equipment selection, potion selection
+    int* attBonusTable = nullptr;
+    int* strBonusTable = nullptr;
+    float* speedTable;
+    int* attPotBoost;
+    int* strPotBoost;
+
+    // prayer boosts are a single value that is found during equipment settings, currently only 1 prayer for entirety of training is supported
+    float attPrayerBoost;
+    float strPrayerboost;
+
+    // opponent information is found during equipment settings and these values are set to those
+    int oppDefLevel;
     int oppDefBonus;
     int oppHpLevel;
 
+    // functions to transfer information found in equipment settings to this object
+    // this was done because passing an equipment object was very slow so only the essential information found
+    // in the equipment object is stored here, where this object will be passed around and used frequently
     void fillTableRolls(Equipment gear);
     void fillPotionBoosts(Equipment gear);
     void fillPrayerBoosts(Equipment gear);

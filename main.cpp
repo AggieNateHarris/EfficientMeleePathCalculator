@@ -6,25 +6,34 @@
 #include "GearUp.h"
 
 int main() {
-    //double expRate = ExpCalculations::expHr(1, 2, 1, 1);
-    //std::cout << expRate << '\n';
+    // create an equipment object
     Equipment player;
+    // create a gear up object
     GearUp gearUp;
+
+    // pick a starting location, ( att, str, def ), initialize a location struct with that information
     int startAtt = 1, startStr = 1, startDef = 1;
-    int endAtt = 10, endStr = 10, endDef = 99;
+    location start = { startAtt, startStr, startDef };
+    // pick an ending location, ( att, str, def ), initialize a location struct with that information
+    int endAtt = 10, endStr = 10, endDef = 10;
+    location end = { endAtt, endStr, endDef };
+
+    // set equipment through the equipment.settings() function
     player.settings(startAtt, startStr, startDef, endAtt, endStr, endDef);
+
+    // take info gathered in settings() and transfer it over to the GearUp object
     gearUp.fillTableRolls(player);
     gearUp.fillPotionBoosts(player);
     gearUp.fillPrayerBoosts(player);
     gearUp.fillOppInfo(player);
+
+    // Create a graph made up of adjacency lists, this requires starting and ending locations a long with a GearUp object
     Graph adjList(startAtt, startStr, startDef, endAtt, endStr, endDef, gearUp);
-    //std::cout << adjList.indexList[267].loc.attack << '\n';
-    //vertex* testLoc = BestPathCalc::find({ 20,20,20 }, { 27, 22, 36 }, { 32, 30, 40 }, adjList);
-    //std::cout << testLoc->loc.attack << " " << testLoc->loc.strength << " " << testLoc->loc.defence << " " << '\n';
-    //adjList.printGraph(player);
-    location start = { startAtt, startStr, startDef };
-    location end = { endAtt, endStr, endDef };
+
+    // create a vector<pathInfo> variable and set it equal to the best path calculated by BestPathCalc::calculatePath()
     std::vector<pathInfo> path = BestPathCalc::calculatePath(adjList, start, end);
+    
+    // print out the path and information collected from the BestPathCalc::calculatePath() function
     for (int i = 0; i < path.size(); i++) {
         std::cout << "( " << path[i].loc.attack << ", " << path[i].loc.strength << ", " << path[i].loc.defence << " ) - Time: " << path[i].time << "\n";
     }
@@ -32,8 +41,6 @@ int main() {
 }
 
 // TODO: Allow for exp rate change for seasonal game modes where exp rates are changed
-// TODO: Finish equipment selection
-// TODO: Try and fix slowness of graph creation
-// TODO: Finish commenting everything
+// TODO: Finish commenting everything, equipment and expcalculations left
 // TODO: Fix unique controlled style to spread xp and +1 att and str stance, bludgeon str only, whip att/def only for full exp
-// TODO: Class deconstructors to clean up pointers
+// TODO: clean up pointers

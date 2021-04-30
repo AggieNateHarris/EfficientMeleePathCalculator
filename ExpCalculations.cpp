@@ -11,8 +11,8 @@ int ExpCalculations::expLeft(int end) {
 //Stance{ 1 : attack, 2 : strength, 3 : defence }, standard +8 stance boost, +11 with stance boost
 double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp) {
     int tableIndex = ExpCalculations::findLocation(startAtt, startStr, startDef, checkAtt, checkStr, checkDef, endAtt, endStr, endDef);
-    int attBonus = gearUp.attRollTable[tableIndex];
-    int strBonus = gearUp.strRollTable[tableIndex];
+    int attBonus = gearUp.attBonusTable[tableIndex];
+    int strBonus = gearUp.strBonusTable[tableIndex];
     int attPotionBoost = gearUp.attPotBoost[checkAtt];
     float strPotionBoost = gearUp.strPotBoost[checkStr];
     float attPrayerBoost = gearUp.attPrayerBoost;
@@ -29,8 +29,8 @@ double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int chec
     else if (stance == 3)
         defStance = 11;
 
-    float attRoll = ((checkAtt * attPotionBoost * attPrayerBoost) + attStance)* (64 + attBonus);                             //Effective lvl * (64 + att bonus)   SOURCE BITTERKOEKJE DPS SHEET
-    float strRoll = floor(0.5 + (((checkStr * strPotionBoost * strPrayerBoost) + strStance) * (64 + strBonus) / 640));     //0.5 + (Effective level * ((64 + str bonus) / 640))
+    float attRoll = (((checkAtt + attPotionBoost) * attPrayerBoost) + attStance)* (64 + attBonus);                             //Effective lvl * (64 + att bonus)   SOURCE BITTERKOEKJE DPS SHEET
+    float strRoll = floor(0.5 + ((((checkStr + strPotionBoost) * strPrayerBoost) + strStance) * (64 + strBonus) / 640));     //0.5 + (Effective level * ((64 + str bonus) / 640))
     float oppDefRoll = (9 + oppDefLvl) * (64 + oppDefBonus);                                                                        //(9 + def lvl) * (64 + def bonus)
     float accuracy;
 
