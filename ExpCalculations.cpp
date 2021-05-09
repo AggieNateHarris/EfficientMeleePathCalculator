@@ -1,6 +1,8 @@
 #include "ExpCalculations.h"
 #include <algorithm>
 
+
+// This class is dedicated to the exp calculations required for the program
 int ExpCalculations::expLeft(int end) {
     if (end > 99 || end < 1)
         std::cout << "Value Range Error: Exp to level tried for a level greater than 99 or less than 1.\n";
@@ -10,7 +12,9 @@ int ExpCalculations::expLeft(int end) {
 
 //Stance{ 1 : attack, 2 : strength, 3 : defence }, standard +8 stance boost, +11 with stance boost
 double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp) {
+    // Set a int value to the table location of GearUp for specific stats being checked
     int tableIndex = ExpCalculations::findLocation(startAtt, startStr, startDef, checkAtt, checkStr, checkDef, endAtt, endStr, endDef);
+    // Character specific bonuses and fighting info in GearUp tables
     int attBonus = gearUp.attBonusTable[tableIndex];
     int strBonus = gearUp.strBonusTable[tableIndex];
     int attPotionBoost = gearUp.attPotBoost[checkAtt];
@@ -21,6 +25,8 @@ double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int chec
     int oppDefBonus = gearUp.oppDefBonus;
     int oppDefLvl = gearUp.oppDefLevel;
     float oppHpLvl = gearUp.oppHpLevel;
+
+    // In combat calculations you get a stance boost of +8 by default, an additional +3 for the style you use, +1 to all for controlled
     int attStance = 8, strStance = 8, defStance = 8;
     if (stance == 1)
         attStance = 11;
@@ -29,6 +35,7 @@ double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int chec
     else if (stance == 3)
         defStance = 11;
 
+    // Calculate the rolls based on the info retrieved and set up
     float attRoll = (((checkAtt + attPotionBoost) * attPrayerBoost) + attStance)* (64 + attBonus);                             //Effective lvl * (64 + att bonus)   SOURCE BITTERKOEKJE DPS SHEET
     float strRoll = floor(0.5 + ((((checkStr + strPotionBoost) * strPrayerBoost) + strStance) * (64 + strBonus) / 640));     //0.5 + (Effective level * ((64 + str bonus) / 640))
     float oppDefRoll = (9 + oppDefLvl) * (64 + oppDefBonus);                                                                        //(9 + def lvl) * (64 + def bonus)
@@ -48,8 +55,6 @@ double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int chec
                          (((oppHpLvl + strRoll + 1) / (oppHpLvl * (strRoll + 1) * 2)) - (2 / (oppHpLvl * (strRoll + 1) * 6)) * (2 * std::min(strRoll, oppHpLvl) + 1));
     
     float overkillDps = avgDmgOvekill / attackSpeed;
-
-    //std::cout << "Debug: Stance:" << stance << " Stats:" << att << " " << str << " " << def << " Exp/hr:" << 4 * overkillDps * 3600 << '\n';
 
     return (4 * overkillDps * 3600); // 4 exp per damage, 3600 seconds per hour, return exp/hr
 }

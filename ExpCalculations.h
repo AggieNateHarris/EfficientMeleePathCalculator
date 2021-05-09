@@ -4,6 +4,7 @@
 #include "GearUp.h"
 #include "Graph.h"
 
+// Exp to be gained between each level, starting at 0->1 = 0, 1->2 = 83 ...
 const int ExpTable[99] = {
 0,
 83,
@@ -106,11 +107,17 @@ const int ExpTable[99] = {
 1228825
 };
 
+// This class is dedicated to the exp calculations required for the program
 class ExpCalculations
 {
 public:
+    // Finds the exp between levels (end - 1) -> (end) using ExpTable struct
     static int expLeft(int end);
+
+    // Finds the exp/hr when given starting stats, current stats, end stats, stance and a GearUp object with gear information
     static double expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp);
+
+    // Finds the node in the table set up in GearUp of a certain set of stats being checked
     static int findLocation(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef);
 };
 

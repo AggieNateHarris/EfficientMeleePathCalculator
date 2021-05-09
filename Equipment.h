@@ -265,7 +265,9 @@ public:
     std::string weapon50Att = "NOTHING";
     std::string weapon60Att = "NOTHING";
     std::string weapon70Att = "NOTHING";
+    std::string secondaryWeapon70Att = "NOTHING";
     std::string weapon75Att = "NOTHING";
+    std::string secondaryWeapon75Att = "NOTHING";
 
     std::string head30Def = "NOTHING";
     std::string head45Def = "NOTHING";

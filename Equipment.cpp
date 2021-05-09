@@ -596,9 +596,10 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
 
     // When attack can be greater than 70 but starts below
     if (startAtt < 75 && endAtt >= 70) {
+        int choice2;
         while (choice < 1 || choice > 18) {
             std::cout << "For when attack is 70 or greater, choose your weapon.\n";
-            std::cout << "1. Abyssal whip controlled\n";
+            std::cout << "1. Abyssal whip controlled(not working atm)\n";
             std::cout << "2. Abyssal whip(STRENGTH NOT ALLOWED)\n";
             std::cout << "3. Abyssal bludgeon(ATT AND DEF NOT ALLOWED)\n";
             std::cout << "4. Abyssal dagger\n";
@@ -618,6 +619,56 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
             std::cout << "18. Exit\n";
             std::cin >> choice;
 
+            // Whip att/def selected, need strength training weapon
+            if (choice == 2) {
+                while (choice2 > 17 || choice2 < 1) {
+                    std::cout << "You selected a whip, you still need a strength training weapon for when attack is 70 or greater.\n";
+                    std::cout << "1. Abyssal whip controlled(not working atm)\n";
+                    std::cout << "2. Abyssal bludgeon(ATT AND DEF NOT ALLOWED)\n";
+                    std::cout << "3. Abyssal dagger\n";
+                    std::cout << "4. Saradomin sword\n";
+                    std::cout << "5. Sarachnis cudgel\n";
+                    std::cout << "6. Dragon scimitar(REQUIRES MONKEY MADNESS)\n";
+                    std::cout << "7. Dragon sword\n";
+                    std::cout << "8. Leaf bladed sword(REQUIRES 55 SLAYER)\n";
+                    std::cout << "9. Ancient staff(REQUIRES DESERT TREASURE)\n";
+                    std::cout << "10. Granite hammer(REQUIRES 50 STR)\n";
+                    std::cout << "11. Brine sabre\n";
+                    std::cout << "12. Dragon warhammer(REQUIRES 60 STR)\n";
+                    std::cout << "13. Obby maul with berserker necklace(REQUIRES 60 STR)\n";
+                    std::cout << "14. Rune warhammer(REQUIRES 40 STR)\n";
+                    std::cout << "15. RPG\n";
+                    std::cout << "16. Nothing\n";
+                    std::cout << "17. Exit\n";
+                    std::cin >> choice2;
+                }
+            }
+
+            // Bludgeon selected, still need att/def training weapon
+            if (choice == 3) {
+                while (choice2 > 17 || choice2 < 1) {
+                    std::cout << "For when attack is 70 or greater, choose your weapon.\n";
+                    std::cout << "1. Abyssal whip controlled(not working atm)\n";
+                    std::cout << "2. Abyssal whip(STRENGTH NOT ALLOWED)\n";
+                    std::cout << "3. Abyssal dagger\n";
+                    std::cout << "4. Saradomin sword\n";
+                    std::cout << "5. Sarachnis cudgel\n";
+                    std::cout << "6. Dragon scimitar(REQUIRES MONKEY MADNESS)\n";
+                    std::cout << "7. Dragon sword\n";
+                    std::cout << "8. Leaf bladed sword(REQUIRES 55 SLAYER)\n";
+                    std::cout << "9. Ancient staff(REQUIRES DESERT TREASURE)\n";
+                    std::cout << "10. Granite hammer(REQUIRES 50 STR)\n";
+                    std::cout << "11. Brine sabre\n";
+                    std::cout << "12. Dragon warhammer(REQUIRES 60 STR)\n";
+                    std::cout << "13. Obby maul with berserker necklace(REQUIRES 60 STR)\n";
+                    std::cout << "14. Rune warhammer(REQUIRES 40 STR)\n";
+                    std::cout << "15. RPG\n";
+                    std::cout << "16. Nothing\n";
+                    std::cout << "17. Exit\n";
+                    std::cin >> choice2;
+                }
+            }
+
             // Set this bracket and all above brackets to the same thing, they will be changed later if at all
             if (choice == 1) {
                 this->weapon70Att = "ABYSSALWHIPCONTROLLED";
@@ -625,13 +676,174 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
             }
 
             if (choice == 2) {
-                this->weapon70Att = "ABYSSALWHIP";
+                this->secondaryWeapon70Att = "ABYSSALWHIP";
                 this->weapon75Att = "ABYSSALWHIP";
+
+                if (choice2 == 1) {
+                    this->secondaryWeapon70Att = "ABYSSALWHIPCONTROLLED";
+                    this->secondaryWeapon75Att = "ABYSSALWHIPCONTROLLED";
+                }
+
+                if (choice2 == 2) {
+                    this->secondaryWeapon70Att = "ABYSSALBLUDGEON";
+                    this->secondaryWeapon75Att = "ABYSSALBLUDGEON";
+                }
+
+                if (choice2 == 3) {
+                    this->secondaryWeapon70Att = "ABYSSALDAGGER";
+                    this->secondaryWeapon75Att = "ABYSSALDAGGER";
+                }
+
+                if (choice2 == 4) {
+                    this->secondaryWeapon70Att = "SARADOMINSWORD";
+                    this->secondaryWeapon75Att = "SARADOMINSWORD";
+                }
+
+                if (choice2 == 5) {
+                    this->secondaryWeapon70Att = "SARACHNISCUDGEL";
+                    this->secondaryWeapon75Att = "SARACHNISCUDGEL";
+                }
+
+                if (choice2 == 6) {
+                    this->secondaryWeapon70Att = "DRAGONSCIMITAR";
+                    this->secondaryWeapon75Att = "DRAGONSCIMITAR";
+                }
+
+                if (choice2 == 7) {
+                    this->secondaryWeapon70Att = "DRAGONSWORD";
+                    this->secondaryWeapon75Att = "DRAGONSWORD";
+                }
+
+                if (choice2 == 8) {
+                    this->secondaryWeapon70Att = "LEAFBLADEDSWORD";
+                    this->secondaryWeapon75Att = "LEAFBLADEDSWORD";
+                }
+
+                if (choice2 == 9) {
+                    this->secondaryWeapon70Att = "ANCIENTSTAFF";
+                    this->secondaryWeapon75Att = "ANCIENTSTAFF";
+                }
+
+                if (choice2 == 10) {
+                    this->secondaryWeapon70Att = "GRANITEHAMMER";
+                    this->secondaryWeapon75Att = "GRANITEHAMMER";
+                }
+
+                if (choice2 == 11) {
+                    this->secondaryWeapon70Att = "BRINESABRE";
+                    this->secondaryWeapon75Att = "BRINESABRE";
+                }
+
+                if (choice2 == 12) {
+                    this->secondaryWeapon70Att = "DRAGONWARHAMMER";
+                    this->secondaryWeapon75Att = "DRAGONWARHAMMER";
+                }
+
+                if (choice2 == 13) {
+                    this->secondaryWeapon70Att = "OBBYMAUL";
+                    this->secondaryWeapon75Att = "OBBYMAUL";
+                }
+
+                if (choice2 == 14) {
+                    this->secondaryWeapon70Att = "RUNEWARHAMMER";
+                    this->secondaryWeapon75Att = "RUNEWARHAMMER";
+                }
+
+                if (choice2 == 15) {
+                    this->secondaryWeapon70Att = "RPG";
+                    this->secondaryWeapon75Att = "RPG";
+                }
+
+                if (choice2 == 16) {
+                    this->secondaryWeapon70Att = "NOTHING";
+                    this->secondaryWeapon75Att = "NOTHING";
+                }
             }
 
             if (choice == 3) {
                 this->weapon70Att = "ABYSSALBLUDGEON";
                 this->weapon75Att = "ABYSSALBLUDGEON";
+
+                // Bludgeon selected, still need an att/def weapon
+                if (choice2 == 1) {
+                    this->secondaryWeapon70Att = "ABYSSALWHIPCONTROLLED";
+                    this->secondaryWeapon75Att = "ABYSSALWHIPCONTROLLED";
+                }
+
+                if (choice2 == 2) {
+                    this->secondaryWeapon70Att = "ABYSSALWHIP";
+                    this->secondaryWeapon75Att = "ABYSSALWHIP";
+                }
+
+                if (choice2 == 3) {
+                    this->secondaryWeapon70Att = "ABYSSALDAGGER";
+                    this->secondaryWeapon75Att = "ABYSSALDAGGER";
+                }
+
+                if (choice2 == 4) {
+                    this->secondaryWeapon70Att = "SARADOMINSWORD";
+                    this->secondaryWeapon75Att = "SARADOMINSWORD";
+                }
+
+                if (choice2 == 5) {
+                    this->secondaryWeapon70Att = "SARACHNISCUDGEL";
+                    this->secondaryWeapon75Att = "SARACHNISCUDGEL";
+                }
+
+                if (choice2 == 6) {
+                    this->secondaryWeapon70Att = "DRAGONSCIMITAR";
+                    this->secondaryWeapon75Att = "DRAGONSCIMITAR";
+                }
+
+                if (choice2 == 7) {
+                    this->secondaryWeapon70Att = "DRAGONSWORD";
+                    this->secondaryWeapon75Att = "DRAGONSWORD";
+                }
+
+                if (choice2 == 8) {
+                    this->secondaryWeapon70Att = "LEAFBLADEDSWORD";
+                    this->secondaryWeapon75Att = "LEAFBLADEDSWORD";
+                }
+
+                if (choice2 == 9) {
+                    this->secondaryWeapon70Att = "ANCIENTSTAFF";
+                    this->secondaryWeapon75Att = "ANCIENTSTAFF";
+                }
+
+                if (choice2 == 10) {
+                    this->secondaryWeapon70Att = "GRANITEHAMMER";
+                    this->secondaryWeapon75Att = "GRANITEHAMMER";
+                }
+
+                if (choice2 == 11) {
+                    this->secondaryWeapon70Att = "BRINESABRE";
+                    this->secondaryWeapon75Att = "BRINESABRE";
+                }
+
+                if (choice2 == 12) {
+                    this->secondaryWeapon70Att = "DRAGONWARHAMMER";
+                    this->secondaryWeapon75Att = "DRAGONWARHAMMER";
+                }
+
+                if (choice2 == 13) {
+                    this->secondaryWeapon70Att = "OBBYMAUL";
+                    this->secondaryWeapon75Att = "OBBYMAUL";
+                }
+
+                if (choice2 == 14) {
+                    this->secondaryWeapon70Att = "RUNEWARHAMMER";
+                    this->secondaryWeapon75Att = "RUNEWARHAMMER";
+                }
+
+                if (choice2 == 15) {
+                    this->secondaryWeapon70Att = "RPG";
+                    this->secondaryWeapon75Att = "RPG";
+                }
+
+                if (choice2 == 16) {
+                    this->secondaryWeapon70Att = "NOTHING";
+                    this->secondaryWeapon75Att = "NOTHING";
+                }
             }
 
             if (choice == 4) {
@@ -711,8 +923,8 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
         choice = 0;
     }
 
-    // When attack can be greater than 75 but starts below
     if (endAtt >= 75) {
+        int choice2;
         while (choice < 1 || choice > 18) {
             std::cout << "For when attack is 75 or greater, choose your weapon.\n";
             std::cout << "1. Ghrazi rapier\n";
@@ -740,6 +952,65 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
             std::cout << "23. Exit\n";
             std::cin >> choice;
 
+            // Whip att/def selected, need strength training weapon
+            if (choice == 4 || choice == 7) {
+                while (choice2 > 21 || choice2 < 1) {
+                    std::cout << "You selected tentacle or whip, you still need a strength training weapon.\n";
+                    std::cout << "1. Ghrazi rapier\n";
+                    std::cout << "2. Inquisitors mace\n";
+                    std::cout << "3. Blade of saeldor\n";
+                    std::cout << "4. Blessed sara sword\n";
+                    std::cout << "5. Abyssal whip controlled(not working atm)\n";
+                    std::cout << "6. Abyssal bludgeon(ATT AND DEF NOT ALLOWED)\n";
+                    std::cout << "7. Abyssal dagger\n";
+                    std::cout << "8. Saradomin sword\n";
+                    std::cout << "9. Sarachnis cudgel\n";
+                    std::cout << "10. Dragon scimitar(REQUIRES MONKEY MADNESS)\n";
+                    std::cout << "11. Dragon sword\n";
+                    std::cout << "12. Leaf bladed sword(REQUIRES 55 SLAYER)\n";
+                    std::cout << "13. Ancient staff(REQUIRES DESERT TREASURE)\n";
+                    std::cout << "14. Granite hammer(REQUIRES 50 STR)\n";
+                    std::cout << "15. Brine sabre\n";
+                    std::cout << "16. Dragon warhammer(REQUIRES 60 STR)\n";
+                    std::cout << "17. Obby maul with berserker necklace(REQUIRES 60 STR)\n";
+                    std::cout << "18. Rune warhammer(REQUIRES 40 STR)\n";
+                    std::cout << "19. RPG\n";
+                    std::cout << "20. Nothing\n";
+                    std::cout << "21. Exit\n";
+                    std::cin >> choice2;
+                }
+            }
+
+            // Bludgeon selected, still need att/def training weapon
+            if (choice == 8) {
+                while (choice2 > 22 || choice2 < 1) {
+                    std::cout << "You selected bludgeon, you still need an att/def training weapon.\n";
+                    std::cout << "1. Ghrazi rapier\n";
+                    std::cout << "2. Inquisitors mace\n";
+                    std::cout << "3. Blade of saeldor\n";
+                    std::cout << "4. Abyssal tentacle(STRENGTH NOT ALLOWED)\n";
+                    std::cout << "5. Blessed sara sword\n";
+                    std::cout << "6. Abyssal whip controlled\n";
+                    std::cout << "7. Abyssal whip(STRENGTH NOT ALLOWED)\n";
+                    std::cout << "8. Abyssal dagger\n";
+                    std::cout << "9. Saradomin sword\n";
+                    std::cout << "10. Sarachnis cudgel\n";
+                    std::cout << "11. Dragon scimitar(REQUIRES MONKEY MADNESS)\n";
+                    std::cout << "12. Dragon sword\n";
+                    std::cout << "13. Leaf bladed sword(REQUIRES 55 SLAYER)\n";
+                    std::cout << "14. Ancient staff(REQUIRES DESERT TREASURE)\n";
+                    std::cout << "15. Granite hammer(REQUIRES 50 STR)\n";
+                    std::cout << "16. Brine sabre\n";
+                    std::cout << "17. Dragon warhammer(REQUIRES 60 STR)\n";
+                    std::cout << "18. Obby maul with berserker necklace(REQUIRES 60 STR)\n";
+                    std::cout << "19. Rune warhammer(REQUIRES 40 STR)\n";
+                    std::cout << "20. RPG\n";
+                    std::cout << "21. Nothing\n";
+                    std::cout << "22. Exit\n";
+                    std::cin >> choice2;
+                }
+            }
+
             // Set this bracket and all above brackets to the same thing, they will be changed later if at all
             if (choice == 1) {
                 this->weapon75Att = "GHRAZIRAPIER";
@@ -755,6 +1026,86 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
 
             if (choice == 4) {
                 this->weapon75Att = "ABYSSALTENTACLE";
+
+                if (choice2 == 1) {
+                    this->secondaryWeapon75Att = "GHRAZIRAPIER";
+                }
+
+                if (choice2 == 2) {
+                    this->secondaryWeapon75Att = "INQUISITORSMACE";
+                }
+
+                if (choice2 == 3) {
+                    this->secondaryWeapon75Att = "BLADEOFSAELDOR";
+                }
+
+                if (choice2 == 4) {
+                    this->secondaryWeapon75Att = "BLESSEDSARASWORD";
+                }
+
+                if (choice2 == 5) {
+                    this->secondaryWeapon75Att = "ABYSSALWHIPCONTROLLED";
+                }
+
+                if (choice2 == 6) {
+                    this->secondaryWeapon75Att = "ABYSSALBLUDGEON";
+                }
+
+                if (choice2 == 7) {
+                    this->secondaryWeapon75Att = "ABYSSALDAGGER";
+                }
+
+                if (choice2 == 8) {
+                    this->secondaryWeapon75Att = "SARADOMINSWORD";
+                }
+
+                if (choice2 == 9) {
+                    this->secondaryWeapon75Att = "SARACHNISCUDGEL";
+                }
+
+                if (choice2 == 10) {
+                    this->secondaryWeapon75Att = "DRAGONSCIMITAR";
+                }
+
+                if (choice2 == 11) {
+                    this->secondaryWeapon75Att = "DRAGONSWORD";
+                }
+
+                if (choice2 == 12) {
+                    this->secondaryWeapon75Att = "LEAFBLADEDSWORD";
+                }
+
+                if (choice2 == 13) {
+                    this->secondaryWeapon75Att = "ANCIENTSTAFF";
+                }
+
+                if (choice2 == 14) {
+                    this->secondaryWeapon75Att = "GRANITEHAMMER";
+                }
+
+                if (choice2 == 15) {
+                    this->secondaryWeapon75Att = "BRINESABRE";
+                }
+
+                if (choice2 == 16) {
+                    this->secondaryWeapon75Att = "DRAGONWARHAMMER";
+                }
+
+                if (choice2 == 17) {
+                    this->secondaryWeapon75Att = "OBBYMAUL";
+                }
+
+                if (choice2 == 18) {
+                    this->secondaryWeapon75Att = "RUNEWARHAMMER";
+                }
+
+                if (choice2 == 19) {
+                    this->secondaryWeapon75Att = "RPG";
+                }
+
+                if (choice2 == 20) {
+                    this->secondaryWeapon75Att = "NOTHING";
+                }
             }
 
             if (choice == 5) {
@@ -767,10 +1118,174 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
 
             if (choice == 7) {
                 this->weapon75Att = "ABYSSALWHIP";
+
+                if (choice2 == 1) {
+                    this->secondaryWeapon75Att = "GHRAZIRAPIER";
+                }
+
+                if (choice2 == 2) {
+                    this->secondaryWeapon75Att = "INQUISITORSMACE";
+                }
+
+                if (choice2 == 3) {
+                    this->secondaryWeapon75Att = "BLADEOFSAELDOR";
+                }
+
+                if (choice2 == 4) {
+                    this->secondaryWeapon75Att = "BLESSEDSARASWORD";
+                }
+
+                if (choice2 == 5) {
+                    this->secondaryWeapon75Att = "ABYSSALWHIPCONTROLLED";
+                }
+
+                if (choice2 == 6) {
+                    this->secondaryWeapon75Att = "ABYSSALBLUDGEON";
+                }
+
+                if (choice2 == 7) {
+                    this->secondaryWeapon75Att = "ABYSSALDAGGER";
+                }
+
+                if (choice2 == 8) {
+                    this->secondaryWeapon75Att = "SARADOMINSWORD";
+                }
+
+                if (choice2 == 9) {
+                    this->secondaryWeapon75Att = "SARACHNISCUDGEL";
+                }
+
+                if (choice2 == 10) {
+                    this->secondaryWeapon75Att = "DRAGONSCIMITAR";
+                }
+
+                if (choice2 == 11) {
+                    this->secondaryWeapon75Att = "DRAGONSWORD";
+                }
+
+                if (choice2 == 12) {
+                    this->secondaryWeapon75Att = "LEAFBLADEDSWORD";
+                }
+
+                if (choice2 == 13) {
+                    this->secondaryWeapon75Att = "ANCIENTSTAFF";
+                }
+
+                if (choice2 == 14) {
+                    this->secondaryWeapon75Att = "GRANITEHAMMER";
+                }
+
+                if (choice2 == 15) {
+                    this->secondaryWeapon75Att = "BRINESABRE";
+                }
+
+                if (choice2 == 16) {
+                    this->secondaryWeapon75Att = "DRAGONWARHAMMER";
+                }
+
+                if (choice2 == 17) {
+                    this->secondaryWeapon75Att = "OBBYMAUL";
+                }
+
+                if (choice2 == 18) {
+                    this->secondaryWeapon75Att = "RUNEWARHAMMER";
+                }
+
+                if (choice2 == 19) {
+                    this->secondaryWeapon75Att = "RPG";
+                }
+
+                if (choice2 == 20) {
+                    this->secondaryWeapon75Att = "NOTHING";
+                }
             }
 
             if (choice == 8) {
                 this->weapon75Att = "ABYSSALBLUDGEON";
+
+                if (choice2 == 1) {
+                    this->secondaryWeapon75Att = "GHRAZIRAPIER";
+                }
+
+                if (choice2 == 2) {
+                    this->secondaryWeapon75Att = "INQUISITORSMACE";
+                }
+
+                if (choice2 == 3) {
+                    this->secondaryWeapon75Att = "BLADEOFSAELDOR";
+                }
+
+                if (choice2 == 4) {
+                    this->secondaryWeapon75Att = "ABYSSALTENTACLE";
+                }
+
+                if (choice2 == 5) {
+                    this->secondaryWeapon75Att = "BLESSEDSARASWORD";
+                }
+
+                if (choice2 == 6) {
+                    this->secondaryWeapon75Att = "ABYSSALWHIPCONTROLLED";
+                }
+
+                if (choice2 == 7) {
+                    this->secondaryWeapon75Att = "ABYSSALWHIP";
+                }
+
+                if (choice2 == 8) {
+                    this->secondaryWeapon75Att = "ABYSSALDAGGER";
+                }
+
+                if (choice2 == 9) {
+                    this->secondaryWeapon75Att = "SARADOMINSWORD";
+                }
+
+                if (choice2 == 10) {
+                    this->secondaryWeapon75Att = "SARACHNISCUDGEL";
+                }
+
+                if (choice2 == 11) {
+                    this->secondaryWeapon75Att = "DRAGONSCIMITAR";
+                }
+
+                if (choice2 == 12) {
+                    this->secondaryWeapon75Att = "DRAGONSWORD";
+                }
+
+                if (choice2 == 13) {
+                    this->secondaryWeapon75Att = "LEAFBLADEDSWORD";
+                }
+
+                if (choice2 == 14) {
+                    this->secondaryWeapon75Att = "ANCIENTSTAFF";
+                }
+
+                if (choice2 == 15) {
+                    this->secondaryWeapon75Att = "GRANITEHAMMER";
+                }
+
+                if (choice2 == 16) {
+                    this->secondaryWeapon75Att = "BRINESABRE";
+                }
+
+                if (choice2 == 17) {
+                    this->secondaryWeapon75Att = "DRAGONWARHAMMER";
+                }
+
+                if (choice2 == 18) {
+                    this->secondaryWeapon75Att = "OBBYMAUL";
+                }
+
+                if (choice2 == 19) {
+                    this->secondaryWeapon75Att = "RUNEWARHAMMER";
+                }
+
+                if (choice2 == 20) {
+                    this->secondaryWeapon75Att = "RPG";
+                }
+
+                if (choice2 == 21) {
+                    this->secondaryWeapon75Att = "NOTHING";
+                }
             }
 
             if (choice == 9) {
@@ -2485,7 +3000,7 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
     }
     choice = 0;
 
-
+    // Set up tables for each stat combination
     this->attBonusTable = new int[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
     this->strBonusTable = new int[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];
     this->speedTable = new float[((endAtt - startAtt + 1) * (endStr - startStr + 1) * (endDef - startDef + 1)) + 1];

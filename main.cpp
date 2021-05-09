@@ -41,6 +41,6 @@ int main() {
 }
 
 // TODO: Allow for exp rate change for seasonal game modes where exp rates are changed
-// TODO: Finish commenting everything, equipment and expcalculations left
-// TODO: Fix unique controlled style to spread xp and +1 att and str stance, bludgeon str only, whip att/def only for full exp
+// TODO: Finish commenting everything, equipment
+// TODO: Fix unique controlled style to spread xp and +1 att and str stance
 // TODO: clean up pointers
