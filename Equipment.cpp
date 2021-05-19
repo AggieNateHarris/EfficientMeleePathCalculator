@@ -596,7 +596,7 @@ void Equipment::settings(int startAtt, int startStr, int startDef, int endAtt, i
 
     // When attack can be greater than 70 but starts below
     if (startAtt < 75 && endAtt >= 70) {
-        int choice2;
+        int choice2 = 0;
         while (choice < 1 || choice > 18) {
             std::cout << "For when attack is 70 or greater, choose your weapon.\n";
             std::cout << "1. Abyssal whip controlled(not working atm)\n";

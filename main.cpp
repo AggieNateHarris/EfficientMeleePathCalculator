@@ -15,8 +15,10 @@ int main() {
     int startAtt = 1, startStr = 1, startDef = 1;
     location start = { startAtt, startStr, startDef };
     // pick an ending location, ( att, str, def ), initialize a location struct with that information
-    int endAtt = 10, endStr = 10, endDef = 10;
+    int endAtt = 99, endStr = 99, endDef = 99;
     location end = { endAtt, endStr, endDef };
+    // Exp multiplier, 1 for base 4 exp per 1 damage
+    float expMulti = 1;
 
     // set equipment through the equipment.settings() function
     player.settings(startAtt, startStr, startDef, endAtt, endStr, endDef);
@@ -28,7 +30,7 @@ int main() {
     gearUp.fillOppInfo(player);
 
     // Create a graph made up of adjacency lists, this requires starting and ending locations a long with a GearUp object
-    Graph adjList(startAtt, startStr, startDef, endAtt, endStr, endDef, gearUp);
+    Graph adjList(expMulti, startAtt, startStr, startDef, endAtt, endStr, endDef, gearUp);
 
     // create a vector<pathInfo> variable and set it equal to the best path calculated by BestPathCalc::calculatePath()
     std::vector<pathInfo> path = BestPathCalc::calculatePath(adjList, start, end);
@@ -40,7 +42,7 @@ int main() {
     return 0;
 }
 
-// TODO: Allow for exp rate change for seasonal game modes where exp rates are changed
-// TODO: Finish commenting everything, equipment
 // TODO: Fix unique controlled style to spread xp and +1 att and str stance
 // TODO: clean up pointers
+// TODO: Add file saving system to save results for specific level ranges and item set ups after completion, 
+//       on start look to see if theres already a result for a specific case before running it

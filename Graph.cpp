@@ -5,7 +5,7 @@
 // Graph input is the level ranges, makes adjacency lists for start, start + 1, ..., end.
 // Graph(1,1,1,99,99,99) would create adjacency list of startpoint: (1,1,1) -> (w)(2,1,1) -> (w)(1,2,1) -> (w)(1,1,2)
                                                                   //(1,2,1) -> (w)(1,3,1) -> (w)(2,2,1) -> (w)(1,2,2)  and so on to (99,99,99)  ... w is weight
-Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef, GearUp gearUp)
+Graph::Graph(float expMultiplier, int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef, GearUp gearUp)
 {
     // Cap inputs to avoid using too much memory. The number of adjacency lists is tied to the range of combinations that will be made of (x att, y str, z def)
     // Also ensure that the starting values are lower than ending values
@@ -58,7 +58,7 @@ Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, i
                             holder->nextLink = holder3;
                         // weight for a vertex is equal to exp to be gained for the level divided by exp/hr
                         // weight is the edge weight between vertices, this is in hour units
-                        holder->weight = ExpCalculations::expLeft(holder->loc.attack) / ExpCalculations::expHr(startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 1, gearUp); // Time in hours to gain required exp
+                        holder->weight = ExpCalculations::expLeft(holder->loc.attack) / ExpCalculations::expHr(expMultiplier, startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 1, gearUp); // Time in hours to gain required exp
                     }
 
                     // if strength can be increased, increase it and place it in holder2, initialize rest of list
@@ -67,14 +67,14 @@ Graph::Graph(int startAtt, int startStr, int startDef, int endAtt, int endStr, i
                         holder2->loc = { i, ii + 1, iii };
                         if (iii < endDef)
                             holder2->nextLink = holder3;
-                        holder2->weight = ExpCalculations::expLeft(holder2->loc.strength) / ExpCalculations::expHr(startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 2, gearUp);
+                        holder2->weight = ExpCalculations::expLeft(holder2->loc.strength) / ExpCalculations::expHr(expMultiplier, startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 2, gearUp);
                     }
 
                     // if defence can be increased, increase it and place it in holder3, initialize rest of list
                     // also initialize weight
                     if (iii < endDef) {
                         holder3->loc = { i, ii, iii + 1 };
-                        holder3->weight = ExpCalculations::expLeft(holder3->loc.defence) / ExpCalculations::expHr(startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 3, gearUp);
+                        holder3->weight = ExpCalculations::expLeft(holder3->loc.defence) / ExpCalculations::expHr(expMultiplier, startAtt, startStr, startDef, i, ii, iii, endAtt, endStr, endDef, 3, gearUp);
                     }
 
                     // If i is less than max attack, that means attack can be increased and the increased

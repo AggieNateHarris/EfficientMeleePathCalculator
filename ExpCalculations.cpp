@@ -11,7 +11,9 @@ int ExpCalculations::expLeft(int end) {
 }
 
 //Stance{ 1 : attack, 2 : strength, 3 : defence }, standard +8 stance boost, +11 with stance boost
-double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp) {
+double ExpCalculations::expHr(float expPerDamage, int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp) {
+    // expPerDamage is meant to be a multiplier of the base normal exp(4 exp per damage, so if 1 is passed in it is normal exp)
+    expPerDamage *= 4;
     // Set a int value to the table location of GearUp for specific stats being checked
     int tableIndex = ExpCalculations::findLocation(startAtt, startStr, startDef, checkAtt, checkStr, checkDef, endAtt, endStr, endDef);
     // Character specific bonuses and fighting info in GearUp tables
@@ -56,7 +58,7 @@ double ExpCalculations::expHr(int startAtt, int startStr, int startDef, int chec
     
     float overkillDps = avgDmgOvekill / attackSpeed;
 
-    return (4 * overkillDps * 3600); // 4 exp per damage, 3600 seconds per hour, return exp/hr
+    return (expPerDamage * overkillDps * 3600); // 4 exp per damage, 3600 seconds per hour, return exp/hr
 }
 
 int ExpCalculations::findLocation(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef) {

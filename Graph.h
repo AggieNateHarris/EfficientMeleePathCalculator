@@ -23,7 +23,7 @@ struct vertex {
 
 class Graph{
 public:
-    Graph(int startAtt, int startStr, int startDef, int var1, int var2, int var3, GearUp gearUp);    // Var are endpoint of 1,2,3,...n.
+    Graph(float expMultiplier, int startAtt, int startStr, int startDef, int var1, int var2, int var3, GearUp gearUp);    // Var are endpoint of 1,2,3,...n.
                                             // Graph(99,99,99) would create adjacency list of startpoint: (1,1,1) -> (w)(2,1,1) -> (w)(1,2,1) -> (w)(1,1,2)
                                                                                                         //(1,2,1) -> (w)(1,3,1) -> (w)(2,2,1) -> (w)(1,2,2)  and so on to (99,99,99)  ... w is weight
     vertex* indexList;

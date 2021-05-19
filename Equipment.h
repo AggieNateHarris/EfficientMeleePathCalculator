@@ -6,10 +6,12 @@
 class Equipment
 {
 public:
+    // tables filled with rolls for varying stats
     int* attBonusTable;
     int* strBonusTable;
     float* speedTable;
 
+    // get functions that get the stats of item slot based on stats
     std::string getWeapon(int att, int str, int def);
     std::string getHelm(int att, int str, int def);
     std::string getNecklace(int att, int str, int def);
@@ -20,6 +22,7 @@ public:
     std::string getBoots(int att, int str, int def);
     std::string getGloves(int att, int str, int def);
     std::string getRing(int att, int str, int def);
+    // get bonuses and boosts based on stats
     int getAttBonus(int att, int str, int def);
     int getStrBonus(int att, int str, int def);
     int getAttPotionBoost(int att);
@@ -27,12 +30,14 @@ public:
     float getAttPrayerBoost();
     float getStrPrayerBoost();
     float getSpeed(int att, int str, int def); // Seconds per attack, EX: 4 tic = 2.4 seconds. -> 4 * 0.6 = 2.4
+    //get stats of opponent you will be training on
     int getOppDefBonus();
     int getOppDefLvl();
     int getOppHpLvl();
     void settings(int startAtt, int startStr, int startDef, int endAtt, int endStr, int endDef);
     ~Equipment();
 
+    // map that holds key value pairs, made of item name and att bonus offered
     std::map<std::string, int> equipmentAtt = {
         {"RPG", 0},
         {"NOTHING", 0},
@@ -108,6 +113,7 @@ public:
         {"BRIMSTONERING", 0}
     };
 
+    // map that holds key value pairs, made of item name and str bonus offered
     std::map<std::string, int> equipmentStr = {
         {"RPG", 0},
         {"NOTHING", 0},
@@ -183,6 +189,7 @@ public:
         {"BRIMSTONERING", 4}
     };
 
+    // map that holds key value pairs, made of item name and seconds per attack
     std::map<std::string, float> equipmentSpeed = {
         {"RPG", 1.8},
         {"NOTHING", 2.4},
@@ -208,6 +215,7 @@ public:
         {"GHRAZIRAPIER", 2.4}
     };
 
+    // map that holds key value pairs, made of special effect title and att bonus multiplier
     std::map<std::string, float> equipmentAttEffect = {
         {"NOTHING", 0},
         {"BERSERKERNECKLACE", 0},
@@ -217,6 +225,7 @@ public:
         {"INQUISITORFULLSET", 0.025}
     };
 
+    // map that holds key value pairs, made of special effect title and str bonus multiplier
     std::map<std::string, float> equipmentStrEffect = {
         {"NOTHING", 0},
         {"BERSERKERNECKLACE", 0.2},
@@ -226,6 +235,7 @@ public:
         {"INQUISITORFULLSET", 0.025}
     };
 
+    // map that holds key value pairs, made of prayer title and att bonus multiplier
     std::map<std::string, float> prayerAttBoost = {
         {"NOTHING", 1},
         {"CLARITY", 1.05},
@@ -234,6 +244,7 @@ public:
         {"PIETY", 1.2}
     };
 
+    // map that holds key value pairs, made of prayer title and str bonus multiplier
     std::map<std::string, float> prayerStrBoost = {
         {"NOTHING", 1},
         {"BURST", 1.05},
@@ -242,16 +253,19 @@ public:
         {"PIETY", 1.23}
     };
 
+    // map that holds key value pairs, npc name and relevant stats
     std::map<std::string, float> opponentDefLvl = {
         {"NOTHING", 0},
         {"ROCKCRAB", 1}
     };
 
+    // map that holds key value pairs, npc name and relevant stats
     std::map<std::string, float> opponentDefBonus = {
         {"NOTHING", 0},
         {"ROCKCRAB", 0}
     };
 
+    // map that holds key value pairs, npc name and relevant stats
     std::map<std::string, float> opponentHp = {
         {"NOTHING", 1},
         {"ROCKCRAB", 50}

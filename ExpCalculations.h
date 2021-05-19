@@ -115,7 +115,7 @@ public:
     static int expLeft(int end);
 
     // Finds the exp/hr when given starting stats, current stats, end stats, stance and a GearUp object with gear information
-    static double expHr(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp);
+    static double expHr(float expPerDamage, int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef, int stance, GearUp gearUp);
 
     // Finds the node in the table set up in GearUp of a certain set of stats being checked
     static int findLocation(int startAtt, int startStr, int startDef, int checkAtt, int checkStr, int checkDef, int endAtt, int endStr, int endDef);
